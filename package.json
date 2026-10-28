@@ -1,6 +1,6 @@
 {
 	"name": "@yedoma-labs/ysyr-import",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Zero-dependency RFC 4180 CSV import with partial success: accepts valid rows, collects row-level errors with line numbers and exports an error report",
 	"type": "module",
 	"main": "./dist/index.cjs",
