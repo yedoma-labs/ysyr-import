@@ -10,8 +10,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-7-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **ысыр** (*ysyr*) — Yakutian (Sakha) for "(noch zu bestätigen)"
-
 Zero-dependency CSV import with partial success. Valid rows are accepted, broken rows are
 collected with their line number, column and reason, and the result can be returned to the user as
 a CSV error report.
