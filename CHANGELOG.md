@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/yedoma-labs/ysyr-import/compare/v1.0.0...v1.0.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* guard formula-like report cells after leading whitespace ([1979e5e](https://github.com/yedoma-labs/ysyr-import/commit/1979e5e9ac1ab907d3d330dda7448f5d3507760f))
+
 # 1.0.0 (2026-10-28)
 
 
