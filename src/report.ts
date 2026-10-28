@@ -5,8 +5,9 @@ const REPORT_HEADER = "line,row,column,code,message";
 /**
  * Renders rejected rows as CSV with the header `line,row,column,code,message` and CRLF line endings.
  *
- * CSV injection protection: any text cell starting with `=`, `+`, `-`, `@`, tab or CR is prefixed
- * with `'`, so spreadsheet applications do not evaluate it as a formula. Cells are quoted per
+ * CSV injection protection: any text cell starting with `=`, `+`, `-`, `@`, tab or CR, optionally
+ * after leading whitespace, is prefixed with `'`, so spreadsheet applications do not evaluate it
+ * as a formula. Cells are quoted per
  * RFC 4180 when they contain a comma, quote or line break.
  */
 export function toErrorReportCsv(rejected: readonly RowError[]): string {
@@ -26,7 +27,7 @@ export function toErrorReportCsv(rejected: readonly RowError[]): string {
 }
 
 function escapeCell(value: string): string {
-	const guarded = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+	const guarded = /^\s*[=+\-@]|^[\t\r]/.test(value) ? `'${value}` : value;
 	if (/[",\r\n]/.test(guarded)) {
 		return `"${guarded.replace(/"/g, '""')}"`;
 	}

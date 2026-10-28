@@ -1,5 +1,17 @@
 # @yedoma-labs/ysyr-import
 
+<picture>
+  <source media="(max-width: 640px)" srcset="https://raw.githubusercontent.com/yedoma-labs/assets/main/resized/banner-resized-mobile.png">
+  <img src="https://raw.githubusercontent.com/yedoma-labs/assets/main/resized/banner-resized.png" alt="Project Header">
+</picture>
+
+[![CI](https://github.com/yedoma-labs/ysyr-import/actions/workflows/ci.yml/badge.svg)](https://github.com/yedoma-labs/ysyr-import/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@yedoma-labs/ysyr-import.svg)](https://www.npmjs.com/package/@yedoma-labs/ysyr-import)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7-blue.svg)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> **ысыр** (*ysyr*) — Yakutian (Sakha) for "(noch zu bestätigen)"
+
 Zero-dependency CSV import with partial success. Valid rows are accepted, broken rows are
 collected with their line number, column and reason, and the result can be returned to the user as
 a CSV error report.
@@ -23,7 +35,7 @@ pnpm add @yedoma-labs/ysyr-import
 
 Requires Node.js 20 or newer. The package has no runtime dependencies.
 
-## Quickstart
+## Quick start
 
 Given this file, `customers.csv`:
 
@@ -205,8 +217,9 @@ the records do not carry them.
 
 Returns a CSV string with the header `line,row,column,code,message` and CRLF line endings.
 
-CSV injection protection: text cells that start with `=`, `+`, `-`, `@`, tab or CR are prefixed
-with an apostrophe (`'`), so spreadsheet applications do not evaluate them as formulas. Cells with
+CSV injection protection: text cells that start with `=`, `+`, `-`, `@`, tab or CR, optionally after
+leading whitespace, are prefixed with an apostrophe (`'`), so spreadsheet applications do not
+evaluate them as formulas. Cells with
 commas, quotes or line breaks are quoted per RFC 4180.
 
 ## CSV parsing rules

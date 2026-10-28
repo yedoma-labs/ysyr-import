@@ -27,11 +27,20 @@ describe("toErrorReportCsv", () => {
 			{ row: 1, line: 2, column: "=HYPERLINK(1)", code: "PARSE", message: "+1" },
 			{ row: 1, line: 2, column: "-x", code: "PARSE", message: "@sum" },
 			{ row: 1, line: 2, column: "\tx", code: "PARSE", message: "\rx" },
+			{ row: 1, line: 2, column: " =SUM(A1)", code: "PARSE", message: "  -1" },
 		];
 		const lines = toErrorReportCsv(rejected).split("\r\n");
 		expect(lines[1]).toBe("2,1,'=HYPERLINK(1),PARSE,'+1");
 		expect(lines[2]).toBe("2,1,'-x,PARSE,'@sum");
 		expect(lines[3]).toBe("2,1,'\tx,PARSE,\"'\rx\"");
+		expect(lines[4]).toBe("2,1,' =SUM(A1),PARSE,'  -1");
+	});
+
+	it("leaves text that only starts with whitespace and no formula character unchanged", () => {
+		const rejected: RowError[] = [
+			{ row: 1, line: 2, column: "a", code: "PARSE", message: "  expected 3" },
+		];
+		expect(toErrorReportCsv(rejected).split("\r\n")[1]).toBe("2,1,a,PARSE,  expected 3");
 	});
 
 	it("quotes cells with commas, quotes or line breaks per RFC 4180", () => {
@@ -67,5 +76,5 @@ describe("toErrorReportCsv", () => {
 
 /** Mirrors the injection guard of the report for expectation building. */
 function prefixed(value: string): string {
-	return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+	return /^\s*[=+\-@]|^[\t\r]/.test(value) ? `'${value}` : value;
 }
